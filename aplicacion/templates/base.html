@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoreo</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        .content {
+            min-height: calc(100vh - 100px); 
+            margin-bottom: 20px; 
+        }
+        .export-btn {
+            margin-top: 20px; 
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        footer {
+            position: relative; 
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Club de campo</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'inicio' %}">Inicio</a></li>
+            <li><a href="{% url 'horarios' %}">Horarios</a></li>
+            <li><a href="{% url 'datos' %}">Datos</a></li>
+    
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}" class="btn-nav">Cerrar Sesión</a></li>
+            {% else %}
+                <li><a href="{% url 'registro' %}" class="btn-nav">Registrarse</a></li>
+                <li><a href="{% url 'login' %}" class="btn-nav">Iniciar Sesión</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    
+    <div class="content" style="text-align: center; margin-top: 50px;">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Piscinas club de campo. Todos los derechos reservados.</p>
+    </footer>
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>

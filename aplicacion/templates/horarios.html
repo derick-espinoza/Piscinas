@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<h1>Horarios de Mantenimiento</h1>
+
+{% if horario %}
+<div class="live-betting">
+    <p><strong>La mantención y monitoreo de agua se realizará el día {{ horario.dia_mantencion }}</strong></p>
+    <p>Horario: {{ horario.horario_inicio }} a {{ horario.horario_fin }}</p>
+</div>
+{% else %}
+<p>No se ha establecido un horario de mantención.</p>
+{% endif %}
+
+{% endblock %}
+
+

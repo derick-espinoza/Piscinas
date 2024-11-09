@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1>Datos</h1>
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<form method="POST" action="{% url 'guardar_datos' %}">
+    {% csrf_token %}
+    <label for="dia">Día:</label>
+    <input type="date" id="dia" name="dia" required><br><br>
+
+    <label for="clientes">Número de clientes:</label>
+    <input type="number" id="clientes" name="clientes" required><br><br>
+
+    <button type="submit" style="padding: 10px 20px; background-color: #000; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+        Guardar
+    </button>
+    <a href="{% url 'prediccion' %}" style="display: inline-block; padding: 10px 20px; background-color: #000000; color: white; border-radius: 5px; font-size: 16px; text-decoration: none; cursor: pointer;">
+        Hacer Predicción
+    </a>
+</form>
+<a href="{% url 'ver_datos' %}" style="display: inline-block; padding: 10px 20px; background-color: #000000; color: white; border-radius: 5px; font-size: 16px; text-decoration: none; cursor: pointer;">
+    Ver Datos
+</a>
+<br><br>
+
+{% endblock %}

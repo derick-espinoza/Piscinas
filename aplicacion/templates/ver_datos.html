@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<a href="javascript:history.back()" style="position: absolute; top: 20px; left: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; border-radius: 5px; font-size: 16px; text-decoration: none; cursor: pointer;">
+    ← Volver
+</a>
+
+<h1>Lista de Datos</h1>
+
+<table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <thead>
+        <tr>
+            <th style="padding: 10px; border: 1px solid #ddd;">Día</th>
+            <th style="padding: 10px; border: 1px solid #ddd;">Clientes</th>
+            <th style="padding: 10px; border: 1px solid #ddd;">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for dato in datos %}
+        <tr>
+            <form method="POST" action="{% url 'modificar_dato' dato.id %}">
+                {% csrf_token %}
+                <td style="padding: 10px; border: 1px solid #ddd;">
+                    <input type="date" name="dia" value="{{ dato.dia|date:'Y-m-d' }}" required>
+                </td>
+                <td style="padding: 10px; border: 1px solid #ddd;">
+                    <input type="number" name="clientes" value="{{ dato.clientes }}" required>
+                </td>
+                <td style="padding: 10px; border: 1px solid #ddd;">
+                    <button type="submit" style="padding: 5px 10px; background-color: #000; color: white; border: none; cursor: pointer;">
+                        Modificar
+                    </button>
+                </td>
+            </form>
+            <td style="padding: 10px; border: 1px solid #ddd;">
+                <form method="POST" action="{% url 'eliminar_dato' dato.id %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" style="padding: 5px 10px; background-color: #ff0000; color: white; border: none; cursor: pointer;">
+                        Eliminar
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+
